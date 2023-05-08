@@ -1,9 +1,20 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const api = createApi({
-  baseQuery: fetchBaseQuery({ baseUrl: process.env.REACT_APP_BASE_URL }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: `${process.env.REACT_APP_BASE_URL}`,
+    credentials: "include",
+    crossDomain: true,
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+      "Access-Control-Allow-Origin": `${process.env.REACT_APP_BASE_URL}`,
+    },
+  }),
+
+  
   reducerPath: "adminApi",
-  tagTypes: ["User", "listPrisoners", "addPrisoners", "updatePrisoner","Status"],
+  tagTypes: ["User", "listPrisoners", "addPrisoners", "updatePrisoner","Status","Dashboard"],
 
   endpoints: (build) => ({
     getUser: build.query({
@@ -29,10 +40,14 @@ export const api = createApi({
       query: () => "status/status",
       providesTags: ["Status"],
     }),
+    getDashboardStats: build.query({
+      query: () => "general/dashboard",
+      providesTags: ["Dashboard"],
+    }),
   }),
 });
 
 
    
 
-export const { useGetUserQuery, useGetallPrisonersQuery, useGetaddPrisonersQuery, useGetStatusQuery, useGetupdatePrisonerQuery } = api;
+export const { useGetUserQuery, useGetallPrisonersQuery, useGetaddPrisonersQuery, useGetStatusQuery, useGetupdatePrisonerQuery, useGetDashboardStatsQuery} = api;
