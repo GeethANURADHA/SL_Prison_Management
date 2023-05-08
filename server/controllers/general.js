@@ -9,3 +9,20 @@ export const getUser = async (req, res) => {
     res.status(404).json({ message: error.message });
   }
 };
+
+export const getDashboardStats = async (req, res) => {
+  try {
+   
+    /* Recent Transactions */
+    const status = await Status.find()
+      .limit(50)
+      .sort({ createdOn: -1 });
+
+    
+    res.status(200).json({
+      status
+    });
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
