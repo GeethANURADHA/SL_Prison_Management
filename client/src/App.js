@@ -4,12 +4,15 @@ import { createTheme } from "@mui/material/styles";
 import { useSelector } from "react-redux";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { themeSettings } from "theme";
+import LogIn from "./login/prisoner/index.jsx";
 import Layout from "scenes/layout";
 import Dashboard from "scenes/dashboard";
 import ListofallPrisoners from "scenes/listPrisoners/index.jsx";
 import AddPrisoners from "scenes/addPrisoners/index.jsx";
 import Status from "scenes/status/index.jsx";
 import UpdatePrisoner from "scenes/updatePrisoner/index.jsx";
+import RequireAuth from "middleware/prisoner/RequireAuth.js";
+import RedirectIfAuthenticated from "middleware/prisoner/RedirectedIfAuthenticated.js";
 
 
 
@@ -22,7 +25,11 @@ function App() {
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <Routes>
-            <Route element={<Layout />}>
+          <Route
+              path="/"
+              element={<RedirectIfAuthenticated Component={LogIn} />}
+            />
+            <Route element={<RequireAuth Component={Layout} />}>
               <Route path="/" element={<Navigate to="/dashboard" replace />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/listPrisoners" element={<ListofallPrisoners />} />

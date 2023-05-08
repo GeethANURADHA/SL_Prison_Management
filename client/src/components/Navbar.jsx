@@ -7,6 +7,7 @@ import {
   SettingsOutlined,
   ArrowDropDownOutlined,
 } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
 import FlexBetween from "components/FlexBetween";
 import { useDispatch } from "react-redux";
 import { setMode } from "state";
@@ -22,16 +23,33 @@ import {
   Menu,
   MenuItem,
   useTheme,
+  useMediaQuery,
 } from "@mui/material";
+import API_URL from "config/prisoner/config";
 
-const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
+const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen}) => {
   const dispatch = useDispatch();
   const theme = useTheme();
+  const navigate = useNavigate();
+  const isNonMediumScreens = useMediaQuery("(min-width: 1200px)");
 
   const [anchorEl, setAnchorEl] = useState(null);
   const isOpen = Boolean(anchorEl);
   const handleClick = (event) => setAnchorEl(event.currentTarget);
   const handleClose = () => setAnchorEl(null);
+  const handleLogout = () => {
+    const response = fetch(`${API_URL}/general/logout`, {
+      method: "GET",
+      withCredentials: true,
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    localStorage.removeItem("DashBoardUser");
+    localStorage.removeItem("DashBoardUserLoggedIn");
+    navigate("/");
+  };
 
   return (
     <AppBar
@@ -44,9 +62,10 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
       <Toolbar sx={{ justifyContent: "space-between" }}>
         {/* LEFT SIDE */}
         <FlexBetween>
-          <IconButton onClick={() => console.log("open/close sidebar")}>
+          <IconButton onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
             <MenuIcon />
           </IconButton>
+          {isNonMediumScreens && (
           <FlexBetween
             backgroundColor={theme.palette.background.alt}
             borderRadius="9px"
@@ -58,6 +77,7 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
               <Search />
             </IconButton>
           </FlexBetween>
+          )}
         </FlexBetween>
 
         {/* RIGHT SIDE */}
@@ -119,7 +139,7 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
               onClose={handleClose}
               anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
             >
-              <MenuItem onClick={handleClose}>Log Out</MenuItem>
+              <MenuItem onClick={handleLogout}>Log Out</MenuItem>
             </Menu>
           </FlexBetween>
         </FlexBetween>
