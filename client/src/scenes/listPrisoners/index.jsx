@@ -74,7 +74,7 @@ const ListPrisoners = () => {
               <Button
                 variant="contained"
                 color="secondary"
-                href={`/prisonerProfile/${params.row._id}`}
+                href={`/profile/${params.row._id}`}
               >
                 Profile
               </Button>{" "}

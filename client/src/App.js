@@ -11,6 +11,7 @@ import ListofallPrisoners from "scenes/listPrisoners/index.jsx";
 import AddPrisoners from "scenes/addPrisoners/index.jsx";
 import Status from "scenes/status/index.jsx";
 import UpdatePrisoner from "scenes/updatePrisoner/index.jsx";
+import Profile from "scenes/profile/index.jsx";
 import RequireAuth from "middleware/prisoner/RequireAuth.js";
 import RedirectIfAuthenticated from "middleware/prisoner/RedirectedIfAuthenticated.js";
 
@@ -36,6 +37,7 @@ function App() {
               <Route path="/addPrisoners" element={<AddPrisoners />} />
               <Route path="/status" element={<Status />} />
               <Route path="/updatePrisoner/:id" element={<UpdatePrisoner />} />
+              <Route path="/profile/:id" element={<Profile />} />
             </Route>
           </Routes>
         </ThemeProvider>
