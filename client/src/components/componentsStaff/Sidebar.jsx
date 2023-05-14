@@ -19,11 +19,8 @@ import {
   HomeOutlined,
   CardMembershipOutlined,
   AddTask,
-  CalendarMonthTwoTone,
   Report,
   SettingsOutlined,
-  
-  
 } from "@mui/icons-material";
 
 import { useEffect, useState } from "react";
@@ -32,31 +29,27 @@ import FlexBetween from "./FlexBetween";
 import profileImage from "assets/profile.jpeg";
 
 const navItems = [
-    {
-     text: "Dashboard",
-     icon: <HomeOutlined />,
-     },
-     {
-      text: "STAFF MANAGEMENT",
-      icon: null,
-     },
-     {
-      text: "Display  Staff Details",
-      icon: <CardMembershipOutlined/>,
-     },
-     {
-      text: "Add Staff Member",
-      icon: <AddTask/>,
-     },
-     {
-      text: "Staff Attendance",
-      icon: <CalendarMonthTwoTone/>,
-     },
-     {
-      text: "Staff Report",
-      icon: <Report/>,
-     },
-    ]
+  {
+    text: "Staff Dashboard",
+    icon: <HomeOutlined />,
+  },
+  {
+    text: "STAFF MANAGEMENT",
+    icon: null,
+  },
+  {
+    text: "Display  Staff Details",
+    icon: <CardMembershipOutlined />,
+  },
+  {
+    text: "Add Staff Member",
+    icon: <AddTask />,
+  },
+  {
+    text: "Staff Report",
+    icon: <Report />,
+  },
+];
 
 const Sidebar = ({
   user,
@@ -64,7 +57,6 @@ const Sidebar = ({
   isSidebarOpen,
   setIsSidebarOpen,
   isNonMobile,
-
 }) => {
   const { pathname } = useLocation();
   const [active, setActive] = useState("");
@@ -76,23 +68,23 @@ const Sidebar = ({
   }, [pathname]);
 
   return (
-     <Box component="nav">
-    {isSidebarOpen && (
+    <Box component="nav">
+      {isSidebarOpen && (
         <Drawer
-        open={isSidebarOpen}
-        onClose={() =>setIsSidebarOpen(false)}
-        variant="persistent"
-        anchor="left"
-        sx={{
-          width: drawerWidth,
-          "& .MuiDrawer-paper": {
-            color: theme.palette.secondary[200],
-            backgroundColor: theme.palette.background.alt,
-            boxSixing: "border-box",
-            borderWidth: isNonMobile ? 0 : "2px",
+          open={isSidebarOpen}
+          onClose={() => setIsSidebarOpen(false)}
+          variant="persistent"
+          anchor="left"
+          sx={{
             width: drawerWidth,
-          },
-        }}
+            "& .MuiDrawer-paper": {
+              color: theme.palette.secondary[200],
+              backgroundColor: theme.palette.background.alt,
+              boxSixing: "border-box",
+              borderWidth: isNonMobile ? 0 : "2px",
+              width: drawerWidth,
+            },
+          }}
         >
           <Box width="100%">
             <Box m="1.5rem 2rem 2rem 3rem">
@@ -109,7 +101,6 @@ const Sidebar = ({
                 )}
               </FlexBetween>
             </Box>
-
 
             <List>
               {navItems.map(({ text, icon }) => {
@@ -140,7 +131,7 @@ const Sidebar = ({
                             : theme.palette.secondary[100],
                       }}
                     >
-                        <ListItemIcon
+                      <ListItemIcon
                         sx={{
                           ml: "2rem",
                           color:
@@ -148,15 +139,15 @@ const Sidebar = ({
                               ? theme.palette.primary[600]
                               : theme.palette.secondary[200],
                         }}
-                        >
+                      >
                         {icon}
-                        </ListItemIcon>
-                        <ListItemText primary={text}/>
-                        {active === lcText && (
+                      </ListItemIcon>
+                      <ListItemText primary={text} />
+                      {active === lcText && (
                         <ChevronRightOutlined sx={{ ml: "auto" }} />
                       )}
-                      </ListItemButton>
-                      </ListItem>
+                    </ListItemButton>
+                  </ListItem>
                 );
               })}
             </List>
@@ -198,7 +189,7 @@ const Sidebar = ({
             </FlexBetween>
           </Box>
         </Drawer>
-    )}
+      )}
     </Box>
   );
 };

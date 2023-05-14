@@ -1,57 +1,87 @@
-import React, { useState } from "react"
-import {LightModeOutlined,DarkModeOutlined,Menu as MenuIcon,Search,SettingsOutlined,ArrowDropDownOutlined,
+import React, { useState } from "react";
+import {
+  LightModeOutlined,
+  DarkModeOutlined,
+  Menu as MenuIcon,
+  Search,
+  SettingsOutlined,
+  ArrowDropDownOutlined,
 } from "@mui/icons-material";
-import FlexBetween from "components/componentsStaff/FlexBetween";
+import { useNavigate } from "react-router-dom";
+import FlexBetween from "./FlexBetween";
 import { useDispatch } from "react-redux";
 import { setMode } from "state";
 import profileImage from "assets/profile.jpeg";
-import {AppBar,Button,Box,Typography,IconButton,InputBase,Toolbar,Menu,MenuItem,useTheme,} from "@mui/material";
+import {
+  AppBar,
+  useTheme,
+  Toolbar,
+  IconButton,
+  InputBase,
+  Button,
+  Box,
+  Typography,
+  Menu,
+  MenuItem,
+  useMediaQuery,
+} from "@mui/material";
+import API_URL from "config/staff/config";
 
-const Navbar = ({
-  user,
-  isSidebarOpen,
-  setIsSidebarOpen,
-  
+const Navbar = ({ isSidebarOpen, setIsSidebarOpen, user }) => {
+  const dispatch = useDispatch();
+  const theme = useTheme();
+  const navigate = useNavigate();
+  const isNonMediumScreens = useMediaQuery("(min-width: 1200px)");
 
-}) => {
+  const [anchorEl, setAnchorEl] = useState(null);
+  const isOpen = Boolean(anchorEl);
+  const handleClick = (event) => setAnchorEl(event.currentTarget);
+  const handleClose = () => setAnchorEl(null);
+  const handleLogout = () => {
+    const response = fetch(`${API_URL}/general/logout`, {
+      method: "GET",
+      withCredentials: true,
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    localStorage.removeItem("DashBoardUser");
+    localStorage.removeItem("DashBoardUserLoggedIn");
+    navigate("/");
+  };
 
-   const dispatch = useDispatch();
-   const theme = useTheme();
-
-   const [anchorEl, setAnchorEl] = useState(null);
-   const isOpen = Boolean(anchorEl);
-   const handleClick = (event) => setAnchorEl(event.currentTarget);
-   const handleClose = () => setAnchorEl(null);
-
-   return (
+  return (
     <AppBar
-    sx={{
-      position: "static",
-      background: "none",
-      boxShadow: "none",
-    }}
+      sx={{
+        position: "static",
+        background: "none",
+        boxShadow: "none",
+      }}
     >
       <Toolbar sx={{ justifyContent: "space-between" }}>
-        {/*LEFT SIDE*/ }
+        {/* LEFT SIDE */}
         <FlexBetween>
           <IconButton onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
             <MenuIcon />
           </IconButton>
-          <FlexBetween
-            backgroundColor={theme.palette.background.alt}
-            borderRadius="9px"
-            gap="3rem"
-            p="0.1rem 1.5rem"
-          >
-             <InputBase placeholder="Search..." />
-            <IconButton>
-              <Search />
-            </IconButton>
-          </FlexBetween>
-          </FlexBetween>
-       
- {/*RIGHT SIDE */}
- <FlexBetween gap="1.5rem">
+          {isNonMediumScreens && (
+            <FlexBetween
+              backgroundColor={theme.palette.background.alt}
+              borderRadius="9px"
+              gap="3rem"
+              p="0.1rem 1.5rem"
+            >
+              <InputBase placeholder="Search..." />
+              <IconButton>
+                <Search />
+              </IconButton>
+            </FlexBetween>
+          )}
+        </FlexBetween>
+        {/* RIGHT SIDE */}
+
+        <FlexBetween gap="1.5rem">
           <IconButton onClick={() => dispatch(setMode())}>
             {theme.palette.mode === "dark" ? (
               <DarkModeOutlined sx={{ fontSize: "25px" }} />
@@ -62,7 +92,6 @@ const Navbar = ({
           <IconButton>
             <SettingsOutlined sx={{ fontSize: "25px" }} />
           </IconButton>
-
           <FlexBetween>
             <Button
               onClick={handleClick}
@@ -108,15 +137,13 @@ const Navbar = ({
               onClose={handleClose}
               anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
             >
-              <MenuItem onClick={handleClose}>Log Out</MenuItem>
+              <MenuItem onClick={handleLogout}>Log Out</MenuItem>
             </Menu>
           </FlexBetween>
-          
-          </FlexBetween>
-
+        </FlexBetween>
       </Toolbar>
     </AppBar>
-    );
-  };
-  
-  export default Navbar;
+  );
+};
+
+export default Navbar;
