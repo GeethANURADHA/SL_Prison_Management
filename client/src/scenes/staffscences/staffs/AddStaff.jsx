@@ -8,6 +8,8 @@ import {
   Box,
   Select,
   MenuItem,
+  FormControl,
+  InputLabel,
 } from "@mui/material";
 
 const AddStaff = () => {
@@ -16,7 +18,7 @@ const AddStaff = () => {
   const [Email, setEmail] = useState("");
   const [designation, setdesignation] = useState("");
   const [Birthday, setBirthday] = useState("");
-  const [Gender, setGender] = useState("Male");
+  const [Gender, setGender] = useState("");
   const [Address, setAddress] = useState("");
   const [BasicSalary, setBasicSalary] = useState("");
   const [PhoneNumber, setPhoneNumber] = useState("");
@@ -40,7 +42,7 @@ const AddStaff = () => {
         PhoneNumber,
         StaffName,
       });
-      navigate("/");
+      navigate("/Display  Staff Details");
     } catch (error) {
       console.log(error);
     }
@@ -117,7 +119,7 @@ const AddStaff = () => {
                 shrink: true,
               }}
             />
-            <div className="field">
+            {/* <div className="field">
               <label className="label">Gender</label>
               <div className="control">
                 <div className="select is-fullwidth is-rounded is-primary">
@@ -131,7 +133,23 @@ const AddStaff = () => {
                   </select>
                 </div>
               </div>
-            </div>
+            </div> */}
+
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-label">sex</InputLabel>
+              <Select
+                label="Sex"
+                value={Gender}
+                onChange={(e) => setGender(e.target.value)}
+                placeholder="sex"
+                fullWidth
+                margin="normal"
+                required
+              >
+                <MenuItem value={"Male"}>Male</MenuItem>
+                <MenuItem value={"Female"}>Female</MenuItem>
+              </Select>
+            </FormControl>
 
             <TextField
               label="Address"
@@ -183,7 +201,8 @@ const AddStaff = () => {
                 </MenuItem>
               ))}
             </Select>
-
+            <br></br>
+            <br></br>
             <div className="field">
               <div className="control">
                 <Button
@@ -201,6 +220,23 @@ const AddStaff = () => {
                   className="button is-success"
                 >
                   Save
+                </Button>
+                <Button
+                  sx={{
+                    backgroundColor: theme.palette.grey[300],
+                    color: theme.palette.background.alt,
+                    fontSize: "14px",
+                    fontWeight: "bold",
+                    padding: "10px 20px",
+                    marginRight: "15px",
+                    float: "right",
+                  }}
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  href={`/Discard`}
+                >
+                  Discard
                 </Button>
               </div>
             </div>

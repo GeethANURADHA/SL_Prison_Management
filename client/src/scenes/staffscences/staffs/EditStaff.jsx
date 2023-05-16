@@ -7,6 +7,8 @@ import {
   Box,
   Select,
   MenuItem,
+  FormControl,
+  InputLabel,
 } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -75,7 +77,7 @@ const EditStaff = () => {
         PhoneNumber,
         StaffName,
       });
-      navigate("/");
+      navigate("/Display  Staff Details");
     } catch (error) {
       console.log(error);
     }
@@ -138,7 +140,7 @@ const EditStaff = () => {
                 shrink: true,
               }}
             />
-            <div className="field">
+            {/* <div className="field">
               <label className="lable">Gender</label>
               <div className="control">
                 <div className="select  is-fullwidth">
@@ -151,7 +153,23 @@ const EditStaff = () => {
                   </select>
                 </div>
               </div>
-            </div>
+            </div> */}
+
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-label">sex</InputLabel>
+              <Select
+                label="Sex"
+                value={Gender}
+                onChange={(e) => setGender(e.target.value)}
+                placeholder="sex"
+                fullWidth
+                margin="normal"
+                required
+              >
+                <MenuItem value={"Male"}>Male</MenuItem>
+                <MenuItem value={"Female"}>Female</MenuItem>
+              </Select>
+            </FormControl>
 
             <TextField
               label="Address"
@@ -202,6 +220,7 @@ const EditStaff = () => {
 
             <br></br>
             <br></br>
+
             <Button
               sx={{
                 backgroundColor: theme.palette.secondary.light,
@@ -216,6 +235,24 @@ const EditStaff = () => {
               color="primary"
             >
               Update
+            </Button>
+
+            <Button
+              sx={{
+                backgroundColor: theme.palette.grey[300],
+                color: theme.palette.background.alt,
+                fontSize: "14px",
+                fontWeight: "bold",
+                padding: "10px 20px",
+                marginRight: "15px",
+                float: "right",
+              }}
+              type="submit"
+              variant="contained"
+              color="primary"
+              href={`/Discard`}
+            >
+              Discard
             </Button>
           </form>
         </div>
