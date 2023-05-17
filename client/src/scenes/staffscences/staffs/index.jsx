@@ -24,11 +24,11 @@ const Staffs = () => {
   };
 
   const columns = [
-    {
-      field: "_id",
-      headerName: "ID",
-      flex: 0.75,
-    },
+    // {
+    //   field: "_id",
+    //   headerName: "ID",
+    //   flex: 0.75,
+    // },
     {
       field: "sname",
       headerName: "Name",
@@ -69,7 +69,6 @@ const Staffs = () => {
         return (
           <Box key={id} display="flex" justifyContent="center">
             <Button
-              
               variant="contained"
               style={{ backgroundColor: "#99EF37", color: "white" }}
               startIcon={<CheckCircleOutlineIcon />}
@@ -81,17 +80,15 @@ const Staffs = () => {
               style={{ textDecoration: "none" }}
             >
               <Button
-               
                 variant="contained"
                 startIcon={<EditIcon />}
                 color="secondary"
-                sx={{ mr: 1 }}
+                sx={{ mr: 1, marginLeft: "10px" }}
               >
                 Edit
               </Button>
             </Link>
             <Button
-              
               variant="contained"
               //startIcon={<DeleteIcon />}
               color="error"
@@ -104,10 +101,9 @@ const Staffs = () => {
       },
     },
   ];
-  
 
   return (
-    <Box  m="1.5rem 2.5rem" >
+    <Box m="1.5rem 2.5rem">
       <Header title="Display Staff Details" subtitle="List of all Staffs" />
       <Box
         mt="40px"
@@ -135,7 +131,6 @@ const Staffs = () => {
           "& .MuiDataGrid-toolbarContainer .MuiButton-text": {
             color: `${theme.palette.secondary[200]} !important`,
           },
-          
         }}
       >
         <Box mb={2}>

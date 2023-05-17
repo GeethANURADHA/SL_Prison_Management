@@ -20,29 +20,18 @@ const StaffChart = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const result = await axios.get(
-          "http://localhost:5001/client/attendances"
-        );
-        const result2 = await axios.get("http://localhost:5001/client/staffs");
+        const result = await axios.get("http://localhost:5001/client/staffs");
 
         // combine data from both API calls
         const combinedData = [
           {
-            id: "attendance",
+            id: "StaffChart",
             data: result.data.map((item) => ({
-              x: item.item_name,
-              y: item.total_quantity,
-            })),
-          },
-          {
-            id: "staffs",
-            data: result2.data.map((item) => ({
-              x: item.item_name,
-              y: item.total_quantity,
+              x: item.StaffName,
+              y: item._id,
             })),
           },
         ];
-
         setData(combinedData);
       } catch (error) {
         console.log(error);
@@ -97,7 +86,7 @@ const StaffChart = () => {
       <Card>
         <CardContent>
           <Typography variant="h6" align="center">
-            Total Quantity of Medicines and Foods
+            Total Quantity of Staffs
           </Typography>
           <div style={{ height: "500px" }}>
             <ResponsiveLine
