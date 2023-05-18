@@ -17,7 +17,8 @@ const Profile = () => {
     const [category, setCategory] = useState("");
     const [dateofincarceration, setDateOfIncarceration] = useState("");
     const [releasedate, setReleaseDate] = useState("");
-    const [addimage, setAddImage] = useState("");
+    const [image, setAddImage] = useState("");
+    const [selectedImage, setSelectedImage] = useState(null);
     const theme = useTheme();
     const navigate = useNavigate();
   const { id } = useParams();
@@ -42,7 +43,7 @@ const Profile = () => {
       setCategory(response.data.category);
       setDateOfIncarceration(response.data.dateofincarceration);
       setReleaseDate(response.data.releasedate);
-      setAddImage(response.data.addimage);
+      setAddImage(response.data.image);
     } catch (error) {
       console.log(error);
     }
@@ -60,12 +61,18 @@ const Profile = () => {
         category,
         dateofincarceration,
         releasedate,
-        addimage,
+        image,
       });
       navigate("/listprisoners");
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    setSelectedImage(file);
+    setAddImage(file.name);
   };
 
   const deletePrisoner = async (id) => {
@@ -228,7 +235,7 @@ const Profile = () => {
               }}
             />
 
-            <TextField
+            {/* <TextField
               label="Add Image"
               variant="outlined"
               value={addimage}
@@ -240,7 +247,16 @@ const Profile = () => {
               inputProps={
                 { readOnly: true, }
             }
-            />
+            /> */}
+
+            <input
+             type="file"
+             accept="image/*"
+             onChange={handleImageChange}
+           />
+           {selectedImage && (
+             <p>Selected image: {selectedImage.name}</p>
+           )}
 
             <br></br>
             <br></br>

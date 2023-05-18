@@ -101,7 +101,7 @@ const Dashboard = () => {
           borderRadius="0.55rem"
         >
           <Typography variant="h6" sx={{ color: theme.palette.secondary[100] }}>
-            Total quantity by item
+            Total count of prisoners
           </Typography><br></br>
 
           <Typography
@@ -109,8 +109,8 @@ const Dashboard = () => {
             fontSize="0.8rem"
             sx={{ color: theme.palette.secondary[200] }}
           >
-            Breakdown of real states and information via category for medicine and food
-            made for this year and total quantity.
+            Breakdown of real states and information via category for prisoners
+            percentage for this year and total count.
           </Typography>
         </Box>
       </Box>
