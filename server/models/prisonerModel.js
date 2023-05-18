@@ -34,7 +34,7 @@ const PrisonerSchema = new mongoose.Schema({
         type: String,
         required:false
     },
-    addimage:{
+    image:{
         type: String,
         required:false
     }

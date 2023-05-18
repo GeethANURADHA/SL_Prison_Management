@@ -21,7 +21,7 @@ const Status = () => {
     const fetchData = async () => {
       try {
         const result = await axios.get(
-          "http://localhost:5001/prisoner/prisoners"
+          `http://localhost:5001/prisoner/prisoners`
         );
 
 

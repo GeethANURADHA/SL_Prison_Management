@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { TextField, Button, useTheme, Box } from "@mui/material";
+import { TextField, Button, useTheme, Box} from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -16,7 +16,8 @@ const AddPrisoners = () => {
   const [category, setCategory] = useState("");
   const [dateofincarceration, setDateOfIncarceration] = useState("");
   const [releasedate, setReleaseDate] = useState("");
-  const [addimage, setAddImage] = useState("");
+  const [image, setAddImage] = useState("");
+  const [selectedImage, setSelectedImage] = useState(null);
   const navigate = useNavigate();
 
   const theme = useTheme();
@@ -33,12 +34,18 @@ const AddPrisoners = () => {
         category,
         dateofincarceration,
         releasedate,
-        addimage,
+        image,
       });
       navigate("/listprisoners");
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    setSelectedImage(file);
+    setAddImage(file.name);
   };
 
   return (
@@ -160,7 +167,7 @@ const AddPrisoners = () => {
               }}
             />
 
-            <TextField
+            {/* <TextField
               label="Add Image"
               variant="outlined"
               value={addimage}
@@ -169,7 +176,17 @@ const AddPrisoners = () => {
               fullWidth
               margin="normal"
               required
-            />
+            /> */}
+
+            
+             <input
+             type="file"
+             accept="image/*"
+             onChange={handleImageChange}
+           />
+           {selectedImage && (
+             <p>Selected image: {selectedImage.name}</p>
+           )}
 
             <br></br>
             <br></br>
