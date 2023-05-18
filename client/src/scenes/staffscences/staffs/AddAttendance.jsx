@@ -38,7 +38,7 @@ const AddAttendance = () => {
   };
 
   //attendance new
-  
+
   const AttendanceSubmit = async (e) => {
     e.preventDefault();
     const body = {
@@ -55,7 +55,7 @@ const AddAttendance = () => {
       );
       console.log("add=", response.data);
 
-      navigate("/dashboard");
+      navigate("/Staff Dashboard");
     } catch (error) {
       console.log(error);
     }

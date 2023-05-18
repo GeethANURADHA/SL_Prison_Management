@@ -5,6 +5,7 @@ import { Traffic } from "@mui/icons-material";
 import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
 import { useGetDashboardStaffStatsQuery } from "state/api";
 import StatBox from "components/componentsStaff/StatBox";
+import StaffChart from "../staffs/StaffChart";
 
 const Dashboard = () => {
   const theme = useTheme();
@@ -56,7 +57,10 @@ const Dashboard = () => {
           backgroundColor={theme.palette.background.alt}
           p="1rem"
           borderRadius="0.55rem"
-        />
+        >
+          <StaffChart view="staffchart" isDashboard={true} />
+        </Box>
+
         <StatBox
           title="Administrative Staff"
           value={data && data.quantity}
