@@ -1,4 +1,5 @@
 import Staff from "../models/Staff.js";
+import Attendance from "../models/Attendance.js";
 
 
 export const getStaffs = async (req , res) =>{
@@ -46,7 +47,7 @@ export const updateStaff = async (req, res) => {
   }
 };
 
-//delete medicine items
+//delete 
 
 export const  deleteStaff = async (req, res) => {
   try {
@@ -56,3 +57,36 @@ export const  deleteStaff = async (req, res) => {
     res.status(400).json({ message: error.message });
   }
 };
+
+
+//add attendance
+ export const AttendanceSubmit = async (req, res) => {
+  const attendances = new Attendance(req.body);
+   try {
+     const insertedStaffAttendance = await attendances.save();
+     res.status(201).json(insertedStaffAttendance);
+   } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+ };
+
+
+export const saveAttendance = async(req, res) => {
+  const attendances = new Attendance(req.body);
+  try {
+    const insertedAttendances = await attendances.save();
+    res.status(201).json(insertedAttendances);
+    } catch (error) {
+      res.status(400).json({ message: error.message });
+    }
+  };
+
+  //get all attendance
+ export const getAllAttendances = async (req, res) => {
+  try {
+    const attendances = await Attendance.find();
+    res.status(200).json(attendances);
+    } catch (error) {
+    res.status(400).json({ message: error});
+    }
+  };

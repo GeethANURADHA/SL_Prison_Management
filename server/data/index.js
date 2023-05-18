@@ -2709,7 +2709,7 @@ export const dataAffiliateStat = [
   
   export const dataUser = [
     {
-      _id: "63701cc1f03239b7f700000e",
+      _id: "63701cc1f03239b7f700001e",
       name: "Konstantine",
       email: "kranstead0@narod.ru",
       password: "admin123",
@@ -2750,5 +2750,14 @@ export const dataAffiliateStat = [
       password: "admin123",
       role: "user",
     },
+
+    {
+      _id: "63701cc1f03239b7f700000e",
+      name: "Shelly",
+      email: "dona.sf.2019@gmail.com",
+      role: "superadmin",
+      password: "password",
+    },
   ];
+
   
