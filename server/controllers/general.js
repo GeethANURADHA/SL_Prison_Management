@@ -14,7 +14,7 @@ export const getprisonerDashboardStats = async (req, res) => {
   try {
    
     /* Recent Transactions */
-    const status = await Status.find()
+    const status = await status.find()
       .limit(50)
       .sort({ createdOn: -1 });
 
