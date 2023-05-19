@@ -71,9 +71,10 @@ const ListPrisoners = () => {
               >
                 Edit
               </Button>{" "}
+
               <Button
                 variant="contained"
-                color="secondary"
+                style={{ backgroundColor: "#99EF37", color: "white" }}
                 href={`/profile/${params.row._id}`}
               >
                 Profile

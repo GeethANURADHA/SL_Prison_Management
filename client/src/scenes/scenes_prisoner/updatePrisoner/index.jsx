@@ -6,7 +6,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import imageUpload from "utils/imageUpload";
+import imageUpload from "../../../utils/imageUpload";
 
 const UpdatePrisoner = () => {
     const [fullname, setFullName] = useState("");

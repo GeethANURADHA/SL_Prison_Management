@@ -41,10 +41,10 @@ const navItems = [
     text: "addPrisoners",
     icon: <FormatListBulleted />,
   },
-  {
-    text: "prisonerProfile",
-    icon: <FormatListBulleted />,
-  },
+  // {
+  //   text: "prisonerProfile",
+  //   icon: <FormatListBulleted />,
+  // },
   {
     text: "Availability of prisoners",
     icon: null,
