@@ -10,15 +10,15 @@ import {
   useTheme,
   useMediaQuery,
 } from "@mui/material";
-import { useGetDashboardStatsQuery } from "state/api";
+import { useGetprisonerDashboardStatsQuery } from "state/api";
 import StatBox from "components/StatBox";
-import Status from "../status";
+import Status from "../statusPrisoner";
 
 
 const Dashboard = () => {
   const theme = useTheme();
   const isNonMediumScreens = useMediaQuery("(min-width: 1200px)");
-  const { data } = useGetDashboardStatsQuery();
+  const { data } = useGetprisonerDashboardStatsQuery();
  
   return (
     <Box m="1.5rem 2.5rem">

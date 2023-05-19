@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { TextField, Button, useTheme, Box } from "@mui/material";
+import { useGetdeletePrisonerQuery } from "state/api";
 import { useNavigate, useParams } from "react-router-dom";
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -8,7 +9,7 @@ import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import imageUpload from "utils/imageUpload";
 
-const UpdatePrisoner = () => {
+const Profile = () => {
     const [fullname, setFullName] = useState("");
     const [nic, setNic] = useState("");
     const [dateofbirth, setDateOfBirth] = useState("");
@@ -22,6 +23,7 @@ const UpdatePrisoner = () => {
     const theme = useTheme();
     const navigate = useNavigate();
   const { id } = useParams();
+  const { refetch } = useGetdeletePrisonerQuery();
 
   useEffect(() => {
     getPrisonersById();
@@ -31,7 +33,7 @@ const UpdatePrisoner = () => {
   const getPrisonersById = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5001/prisoner/Prisoners/${id}`
+        `http://localhost:5001/prisoner/prisoners/${id}`
       );
       console.log(response.data); // check if data is being fetched correctly
       setFullName(response.data.fullname);
@@ -67,17 +69,29 @@ const UpdatePrisoner = () => {
       console.log(error);
     }
   };
-  const handleImageChange = async (e) => {
-    const file = e.target.files[0];
-    const url = await imageUpload(file, 'prisoner')
-    setAddImage(url);
+
+  const deletePrisoner = async (id) => {
+    const confirmed = window.confirm(
+      "Are you sure you want to released this prisoner?"
+    );
+    if (confirmed) {
+      try {
+        await axios.delete(`http://localhost:5001/prisoner/Prisoners/${id}`);
+        refetch(); // using the refetch function provided by the useGetdeletePrisonerQuery() hook to fetch updated data
+        navigate("/listprisoners");
+      } catch (error) {
+        console.log(error);
+      }
+    }
   };
 
+ 
+  // const { id } = params.row;
   return (
     <Box m="2.5rem 10.5rem">
       <div className="columns mt-5">
         <div className="column is-half">
-          <h1>Update Prisoner</h1>
+          <h1>Prisoner Profile</h1>
           <br></br>
           <form onSubmit={updatePrisoner}>
           <TextField
@@ -89,6 +103,9 @@ const UpdatePrisoner = () => {
               fullWidth
               margin="normal"
               required
+              inputProps={
+                { readOnly: true, }
+            }
             />
             <TextField
               label="NIC"
@@ -99,6 +116,9 @@ const UpdatePrisoner = () => {
               fullWidth
               margin="normal"
               required
+              inputProps={
+                { readOnly: true, }
+            }
             />
             <TextField
               label="Date Of Birth"
@@ -109,9 +129,13 @@ const UpdatePrisoner = () => {
               fullWidth
               margin="normal"
               required
+              inputProps={
+                { readOnly: true, }
+            }
               type="date"
               InputLabelProps={{
                 shrink: true,
+                
               }}
             />
             <FormControl fullWidth>
@@ -124,6 +148,9 @@ const UpdatePrisoner = () => {
               fullWidth
               margin="normal"
               required
+              inputProps={
+                { readOnly: true, }
+            }
             >
               <MenuItem value={"Male"}>Male</MenuItem>
               <MenuItem value={"Female"}>Female</MenuItem>
@@ -139,6 +166,9 @@ const UpdatePrisoner = () => {
               fullWidth
               margin="normal"
               required
+              inputProps={
+                { readOnly: true, }
+            }
             />
 
 <FormControl fullWidth>
@@ -151,6 +181,9 @@ const UpdatePrisoner = () => {
               fullWidth
               margin="normal"
               required
+              inputProps={
+                { readOnly: true, }
+            }
             >
               <MenuItem value={"Murder"}>Murder</MenuItem>
               <MenuItem value={"Robbery"}>Robbery</MenuItem>
@@ -170,6 +203,9 @@ const UpdatePrisoner = () => {
               fullWidth
               margin="normal"
               required
+              inputProps={
+                { readOnly: true, }
+            }
               type="date"
               InputLabelProps={{
                 shrink: true,
@@ -185,69 +221,40 @@ const UpdatePrisoner = () => {
               fullWidth
               margin="normal"
               required
+              inputProps={
+                { readOnly: true, }
+            }
               type="date"
               InputLabelProps={{
                 shrink: true,
               }}
             />
 
-            {/* <TextField
-              label="Add Image"
-              variant="outlined"
-              value={addimage}
-              onChange={(e) => setAddImage(e.target.value)}
-              placeholder="add image"
-              fullWidth
-              margin="normal"
-              required
-            /> */}
-
-            {/* <input
-             type="file"
-             accept="image/*"
-             onChange={handleImageChange}
-           />
-           {selectedImage && (
-             <p>Selected image: {selectedImage.name}</p>
-           )} */}
-          
             {image && (
               <div>
                 <img src={image} alt="Profile" style={{ width: "200px", height: "200px" }} />
               </div>
             )}
-            <input
-              type="file"
-              accept="image/*"
-              onChange={handleImageChange}
-            />
-            {selectedImage && (
-              <p>Selected image: {selectedImage.name}</p>
-            )}
-            
 
             <br></br>
             <br></br>
+ 
             <Button
-              sx={{
-                backgroundColor: theme.palette.secondary.light,
-                color: theme.palette.background.alt,
-                fontSize: "14px",
-                fontWeight: "bold",
-                padding: "10px 20px",
-                float: "right",
-              }}
-              type="submit"
               variant="contained"
-              color="primary"
+              color="error"
+              onClick={() => deletePrisoner(id)}
             >
-              Update
+              Released from Prison
             </Button>
+
           </form>
         </div>
       </div>
     </Box>
   );
-};
+          }
 
-export default UpdatePrisoner;
+// };
+
+
+export default Profile;

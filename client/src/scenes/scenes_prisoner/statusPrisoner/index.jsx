@@ -29,7 +29,7 @@ const Status = () => {
         // combine data from both API calls
         const combinedData = [
           {
-            id: "status",
+            id: "statusPrisoner",
             data: result.data.map((item) => ({
               x: item.category[0],
               y: item.count,
