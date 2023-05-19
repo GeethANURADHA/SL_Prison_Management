@@ -5,9 +5,11 @@ import Prisoner from "../models/prisonerModel.js";
 
 export const getStatus = async (req, res) => {
   try {
-    const prisoner = await Prisoner.find();
-    const Status = [...prisoner];
-    res.status(200).json(Status[0]);
+    const prisoner = await Prisoner.aggregate([
+      { $group: { _id: "$category", category: { $addToSet: "$category"}, count: { $sum: 1 } } },
+      { $project: { _id: 0 } }
+   ]).sort({category : 1});
+    res.status(200).json(prisoner);
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
