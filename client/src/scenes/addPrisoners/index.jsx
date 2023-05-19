@@ -6,6 +6,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
+import imageUpload from "utils/imageUpload";
 
 const AddPrisoners = () => {
   const [fullname, setFullName] = useState("");
@@ -42,10 +43,10 @@ const AddPrisoners = () => {
     }
   };
 
-  const handleImageChange = (e) => {
+  const handleImageChange = async (e) => {
     const file = e.target.files[0];
-    setSelectedImage(file);
-    setAddImage(file.name);
+    const url = await imageUpload(file, 'prisoner')
+    setAddImage(url);
   };
 
   return (

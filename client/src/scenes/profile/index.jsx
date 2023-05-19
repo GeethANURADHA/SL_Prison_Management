@@ -7,6 +7,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
+import imageUpload from "utils/imageUpload";
 
 const Profile = () => {
     const [fullname, setFullName] = useState("");
@@ -67,12 +68,6 @@ const Profile = () => {
     } catch (error) {
       console.log(error);
     }
-  };
-
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    setSelectedImage(file);
-    setAddImage(file.name);
   };
 
   const deletePrisoner = async (id) => {
@@ -249,14 +244,11 @@ const Profile = () => {
             }
             /> */}
 
-            <input
-             type="file"
-             accept="image/*"
-             onChange={handleImageChange}
-           />
-           {selectedImage && (
-             <p>Selected image: {selectedImage.name}</p>
-           )}
+            {image && (
+              <div>
+                <img src={image} alt="Profile" style={{ width: "200px", height: "200px" }} />
+              </div>
+            )}
 
             <br></br>
             <br></br>

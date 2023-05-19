@@ -21,21 +21,21 @@ const Status = () => {
     const fetchData = async () => {
       try {
         const result = await axios.get(
-          `http://localhost:5001/prisoner/prisoners`
+          `http://localhost:5001/status/status`
         );
 
+        console.log(result);
 
         // combine data from both API calls
         const combinedData = [
           {
-            id: "prisoner",
+            id: "status",
             data: result.data.map((item) => ({
-              x: item.item_name,
-              y: item.total_quantity,
+              x: item.category[0],
+              y: item.count,
             })),
           },
         ];
-
         setData(combinedData);
       } catch (error) {
         console.log(error);
