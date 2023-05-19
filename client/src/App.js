@@ -17,6 +17,7 @@ import EditFood from "scenes/scenes_inventory/food/EditFood.jsx";
 import Status from "scenes/scenes_inventory/status";
 import RequireAuth from "middleware/inventory/RequireAuth.js";
 import RedirectIfAuthenticated from "middleware/inventory/RedirectedIfAuthenticated.js";
+import Home from "./view/home/index.jsx";
 
 function App() {
   const mode = useSelector((state) => state.global.mode);
@@ -27,8 +28,9 @@ function App() {
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <Routes>
+            <Route path="/" element={<Home />} />
             <Route
-              path="/"
+              path="/inventorylogin"
               element={<RedirectIfAuthenticated Component={LogIn} />}
             />
             <Route element={<RequireAuth Component={Layout} />}>
