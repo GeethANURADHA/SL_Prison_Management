@@ -10,7 +10,7 @@ export const getUser = async (req, res) => {
   }
 };
 
-export const getDashboardStats = async (req, res) => {
+export const getprisonerDashboardStats = async (req, res) => {
   try {
    
     /* Recent Transactions */

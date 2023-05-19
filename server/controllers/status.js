@@ -3,7 +3,7 @@ import Prisoner from "../models/prisonerModel.js";
 
 //get all items from status
 
-export const getStatus = async (req, res) => {
+export const getstatusPrisoner = async (req, res) => {
   try {
     const prisoner = await Prisoner.aggregate([
       { $group: { _id: "$category", category: { $addToSet: "$category"}, count: { $sum: 1 } } },

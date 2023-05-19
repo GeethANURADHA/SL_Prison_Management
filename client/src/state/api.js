@@ -14,7 +14,7 @@ export const api = createApi({
 
   
   reducerPath: "adminApi",
-  tagTypes: ["User", "listPrisoners", "addPrisoners", "updatePrisoner","Status","Dashboard","deletePrisoner"],
+  tagTypes: ["User", "listPrisoners", "addPrisoners", "updatePrisoner","statusPrisoner","prisonerDashboard","deletePrisoner"],
 
   endpoints: (build) => ({
     getUser: build.query({
@@ -36,12 +36,12 @@ export const api = createApi({
       query: () => "prisoner/updatePrisoner",
       providesTags: ["updatePrisoner"],
     }),
-    getStatus: build.query({
-      query: () => "status/status",
+    getstatusPrisoner: build.query({
+      query: () => "status/statusPrisoner",
       providesTags: ["Status"],
     }),
-    getDashboardStats: build.query({
-      query: () => "general/dashboard",
+    getprisonerDashboardStats: build.query({
+      query: () => "general/prisonerDashboard",
       providesTags: ["Dashboard"],
     }),
     getdeletePrisoner: build.query({
@@ -54,4 +54,4 @@ export const api = createApi({
 
    
 
-export const { useGetUserQuery, useGetallPrisonersQuery, useGetaddPrisonersQuery, useGetStatusQuery, useGetupdatePrisonerQuery, useGetDashboardStatsQuery, useGetdeletePrisonerQuery} = api;
+export const { useGetUserQuery, useGetallPrisonersQuery, useGetaddPrisonersQuery, useGetstatusPrisonerQuery, useGetupdatePrisonerQuery, useGetprisonerDashboardStatsQuery, useGetdeletePrisonerQuery} = api;

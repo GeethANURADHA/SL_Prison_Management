@@ -1,12 +1,12 @@
 import express from "express";
 import {
 
-  getStatus,
+getstatusPrisoner,
 
 } from "../controllers/status.js";
 
 const router = express.Router();
 
-router.get("/status", getStatus);
+router.get("/status", getstatusPrisoner);
 
 export default router;
