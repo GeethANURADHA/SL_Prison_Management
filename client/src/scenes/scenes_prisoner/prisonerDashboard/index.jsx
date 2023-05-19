@@ -51,7 +51,7 @@ const Dashboard = () => {
         <StatBox
           title="Drug"
           value={data && data.manufacturer}
-          increase="+51%"
+          increase="+33%"
           description="Since last month"
           icon={
             <Traffic
@@ -71,7 +71,7 @@ const Dashboard = () => {
         <StatBox
           title="Murder"
           value={data && data.status}
-          increase="+5%"
+          increase="+51%"
           description="Since last month"
           icon={
             <Traffic
