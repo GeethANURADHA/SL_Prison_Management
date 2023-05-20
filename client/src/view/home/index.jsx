@@ -33,7 +33,7 @@ const Profile = () => {
           type="primary"
           size="large"
           htmlType="button"
-          href={``}
+          href={`/profilelogin`}
           style={{ borderRadius: 30, marginTop: 50, width: 100 }}
         >
           Login
@@ -54,7 +54,7 @@ const Jail = () => {
           type="primary"
           size="large"
           htmlType="button"
-          href={``}
+          href={`/jaillogin`}
           style={{ borderRadius: 30, marginTop: 50, width: 100 }}
         >
           Login
@@ -75,7 +75,7 @@ const Staff = () => {
           type="primary"
           size="large"
           htmlType="button"
-          href={``}
+          href={`/stafflogin`}
           style={{ borderRadius: 30, marginTop: 50, width: 100 }}
         >
           Login

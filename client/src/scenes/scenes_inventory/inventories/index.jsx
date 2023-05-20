@@ -25,11 +25,11 @@ const Inventories = () => {
 
 
   const columns = [
-    {
-      field: "_id",
-      headerName: "ID",
-      flex: 1,
-    },
+    // {
+    //   field: "_id",
+    //   headerName: "ID",
+    //   flex: 1,
+    // },
     {
       field: "item_name",
       headerName: "Item Name",

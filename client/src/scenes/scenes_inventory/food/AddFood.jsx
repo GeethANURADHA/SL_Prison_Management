@@ -17,25 +17,26 @@ const AddFood = () => {
 
   const theme = useTheme();
 
-  const saveFoods = async (e) => {
-    e.preventDefault();
-    try {
-      await axios.post("http://localhost:5001/client/foods", {
-        item_name,
-        description,
-        manufacturer,
-        manufacture_date,
-        expire_date,
-        category,
-        unit_price,
-        total_quantity,
-        status,
-      });
-      navigate("/food");
-    } catch (error) {
-      console.log(error);
-    }
-  };
+ const saveFoods = async (e) => {
+   e.preventDefault();
+   try {
+     await axios.post("http://localhost:5001/client/foods", {
+       item_name,
+       description,
+       manufacturer,
+       manufacture_date,
+       expire_date,
+       category,
+       unit_price,
+       total_quantity,
+       status,
+     });
+     navigate("/food");
+   } catch (error) {
+     console.log(error);
+   }
+ };
+
 
   return (
     <Box m="2.5rem 10.5rem">
